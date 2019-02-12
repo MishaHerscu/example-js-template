@@ -2,16 +2,6 @@
 
 const app = require('../../app.js');
 const helpers = require('../../helpers.js');
-const playerApi = require('../playerActions/api.js');
-const playerUi = require('../playerActions/ui.js');
-const teamApi = require('../teamActions/api.js');
-const teamUi = require('../teamActions/ui.js');
-const gameApi = require('../gameActions/api.js');
-const gameUi = require('../gameActions/ui.js');
-const goalApi = require('../goalActions/api.js');
-const goalUi = require('../goalActions/ui.js');
-const assistApi = require('../assistActions/api.js');
-const assistUi = require('../assistActions/ui.js');
 
 const success = (data) => {
   if (data) {
