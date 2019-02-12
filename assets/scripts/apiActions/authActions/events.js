@@ -7,9 +7,7 @@ const ui = require('./ui.js');
 
 const onSignUp = (event) => {
   event.preventDefault();
-
   let data = getFormFields(event.target);
-
   api.signUp(data)
   .done(ui.success)
   .then(ui.signUpSuccess)
@@ -26,7 +24,6 @@ const onSignIn = (event) => {
 
 const onSignOut = (event) => {
   event.preventDefault();
-  $('#standings-button').click();
   api.signOut()
   .done(ui.signOutSuccess)
   .fail(ui.failure);
@@ -40,12 +37,19 @@ const onChangePassword = (event) => {
   .fail(ui.failure);
 };
 
+const onDeleteAccount = (event) => {
+  event.preventDefault();
+  api.deleteAccount()
+  .done(ui.deleteAccountSuccess)
+  .fail(ui.failure);
+};
+
 const addHandlers = () => {
   $('#sign-up').on('submit', onSignUp);
   $('#sign-in').on('submit', onSignIn);
   $('#change-password').on('submit', onChangePassword);
-
   $('#sign-out').on('click', onSignOut);
+  $('#delete-account').on('click', onDeleteAccount);
 };
 //
 module.exports = {

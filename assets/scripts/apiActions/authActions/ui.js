@@ -16,94 +16,29 @@ const failure = (error) => {
 };
 
 const signUpSuccess = function(){
+  $('#sign-up-givenname').val()
+  $('#sign-up-surname').val()
+  $('#sign-up-email').val()
+  $('#sign-up-pw').val()
+  $('#sign-up-pw-confirm').val()
+
   $('#sign-in-email').val($('#sign-up-email').val());
   $('#sign-in-pw').val($('#sign-up-pw').val());
+
   $('#sign-in').submit();
   $('#signUpModal').modal('hide');
 };
 
-const setPlayerVals = function(){
-  $('#profile-last-name').text(app.player.surname);
-  $('#profile-first-name').text(app.player.given_name);
-  $('#profile-email').text(app.player.email);
-  $('#profile-phone-number').text(app.player.phone_number);
-  $('#profile-captain').text(app.player.captain);
-
-  $('#profile-team').text(helpers.getTeamName(app.player, app.teams));
-
-  $('#update-player-user-id').val(app.user.id);
-  $('#current-team-id').val(app.player.team_id);
-  $('#create-attendance-player-id').val(app.user.id);
-
-  $('#create-post-player-id').val(app.player.id);
-  $('#create-post-team-id').val(app.player.team_id);
-
-  $('#update-player-surname').val(app.player.surname);
-  $('#update-player-given-name').val(app.player.given_name);
-  $('#update-player-email').val(app.player.email);
-  $('#update-player-phone-number').val(app.player.phone_number);
-  $('#update-player-team-id').val(app.player.team_id);
-
-  $('#create-player-email').val(app.player.email);
-};
-
-const setPlayer = function(data){
-  let players = data.players;
-  let max = players.length;
-  for(let i = 0; i < max; i++){
-    if(players[i].user.id === app.user.id){
-      app.player = players[i];
-      setPlayerVals();
-    }
-  }
-  teamApi.show()
-  .done(teamUi.showTeamsSuccess)
-  .then(
-    playerApi.show()
-    .done(playerUi.showPlayersSuccess)
-    .then(
-      gameApi.show()
-      .done(gameUi.showGamesSuccess)
-      .then(
-        goalApi.show()
-        .done(goalUi.showOnlyGoalsSuccess)
-        .then(
-          assistApi.show()
-          .done(assistUi.showAssistsSuccess)
-          .fail(assistUi.failure)
-        )
-        .fail(goalUi.failure)
-      )
-      .fail(gameUi.failure)
-    )
-    .fail(playerUi.failure)
-  )
-  .fail(teamUi.failure);
-};
-
-const signInSuccess = (data) => {
-  $('#signInModal').modal('hide');
-  $('.signed-in').show();
-  $('#non-admin-status-title').hide();
-  $('#admin-status-title').hide();
-  $('.signed-out').hide();
-  $('#create-player-email').val($('#sign-in-email').val());
-  app.user = data.user;
-
-  playerApi.show()
-  .done(setPlayer)
-  .fail(playerApi.failure);
-};
-
 const signOutSuccess = () => {
-  console.log('User signed out successfully');
-  app.user = null;
-  app.player = null;
-  app.team = null;
-  app.teams = null;
-  app.games = null;
-  app.teamMembers = null;
-  app.playerStats = null;
+  $('#sign-in-email').val()
+  $('#sign-in-pw').val()
+  $('.signed-in').hide();
+  $('.signed-out').show();
+};
+
+const deleteAccountSuccess = () => {
+  $('#sign-in-email').val()
+  $('#sign-in-pw').val()
   $('.signed-in').hide();
   $('.signed-out').show();
 };
@@ -112,8 +47,6 @@ module.exports = {
   success,
   failure,
   signUpSuccess,
-  signInSuccess,
   signOutSuccess,
-  setPlayer,
-  setPlayerVals,
+  deleteAccountSuccess,
 };
