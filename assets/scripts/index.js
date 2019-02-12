@@ -9,22 +9,11 @@ require('./example.js');
 const authEvents = require('./apiActions/authActions/events.js');
 const helpersEvents = require('./helpers.js');
 
-// const bookEvents = require('./books/book-events.js');
-
 $('.signed-in').hide();
 $('.signed-out').show();
 $('#admin-status-title').hide();
 
 $(() => {
   authEvents.addHandlers();
-  gameEvents.addHandlers();
-  playerEvents.addHandlers();
-  teamEvents.addHandlers();
-  goalEvents.addHandlers();
-  assistEvents.addHandlers();
-  attendanceEvents.addHandlers();
-  postEvents.addHandlers();
   helpersEvents.addHandlers();
-
-  teamEvents.onPageLoad();
 });
